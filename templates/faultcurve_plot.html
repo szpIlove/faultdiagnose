@@ -1,0 +1,35 @@
+<script type="text/javascript">
+        var bigImg = document.createElement("img");		//创建一个img元素
+        bigImg.src="data:image/png;base64, {{faultType_plot_url}}";   //给img元素的src属性赋值
+		bigImg.style.display="block";
+        bigImg.style.position="relative";
+        bigImg.style.margin="auto";
+        var myDiv = document.getElementById('myDiv'); //获得dom对象
+		myDiv.appendChild(bigImg);
+    </script>
+    <div>
+     <ol class="breadcrumb">
+	    <!--<li><a href="#">Home</a></li>
+	    <li class="active"><a href="#">Library</a></li>-->
+	    <li>数据预处理</li>
+    </ol>
+    <div style="overflow:auto; height:360px; width:auto; border:1px solid; margin:20px;">
+       <div class="nav">
+            <table align="left" width="100%" class="table table-bordered">
+               <tbody>
+                    <tr align="center">
+                       <td align="center" width="30%">故障类型</td>
+                       <td align="left" width="30%">故障名称</td>
+
+                   </tr>
+
+                   <tr>
+                      <td align="center" width="30%">{{faultType}}</td>
+                       <td align="left" width="30%">{{faultDescript}}</td>
+                   </tr>
+               </tbody>
+          </table>
+       </div>
+       <div class="nav" id="myDiv"></div>
+  </div>
+</div>

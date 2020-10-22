@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+    {% block meta %}<!-- block meta  -->{% endblock %}
+    <title>故障诊断</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='image/bitbug_favicon.ico') }}" type="image/x-icon" />
+	<!-- css -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ 
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ 
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% block beforehead %}<!-- before head  -->{% endblock %}
+</head>
+<style>
+html,body{
+    width:100%;
+    height:100%;
+    
+    margin:0px;
+}
+    #main{
+        width:100%;
+        height:100%;
+       /* background:red;*/
+        display:flex;
+        flex-wrap: wrap;
+        flex-direction:row;
+        justify-content: start;
+    }
+    .top-head{
+        width: 100%;
+        /*height: 5%;*/
+		background: #0c3144;
+        display:flex;
+        flex-wrap: no-wrap;
+        justify-content:center;
+    }
+    .left-menu{
+        width:12%;
+        height: 95%;
+        background:#0b3043;
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 20px;
+    }
+    .right-content{
+        width: 88%;
+        height:90%;
+     /*   background:blue;*/
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 20px;
+    }
+    #logo{
+        width:12%;
+        height:100%;
+        text-align:center;
+        line-height:80px;
+        /*background:purple;*/
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 22px;
+		color:#FFFFFF;
+    }
+    #title{
+        width:50%;
+        font-size: 28px;
+        text-align:left;
+        line-height: 80px;
+        /*background:#eee;*/
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 20px;
+		color:#FFFFFF;
+    }
+    #per-mes{
+        width:38%;
+        height:100%;
+		text-align:center;
+        line-height: 80px;
+        /*background:green;*/
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 18px;
+		color:#FFFFFF;
+    }
+    li{
+        list-style:none;
+    }
+ 
+    a{
+        text-decoration: none;
+    }
+	.left-menu a{
+		color:#FFFFFF;
+    }
+    a:focus, a:hover {
+    color: #23527c;
+    text-decoration: none;
+    }
+    li:hover{
+        list-style:none;
+    }
+	#list1,#list2,#list3,#list4{
+        font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 16px;
+    }
+</style>
+<script type="text/javascript">
+$(function(){
+    //首页
+     $("#index1").click(function(){
+         $("#contentid").load("/index");
+        // $.get('/',function(data){});
+     });
+     // 数据处理
+     $('#dataprocess').bind("click", function(){
+         $("#contentid").load("/dataprocess");
+        /*$.get('/dataprocess',function(data){
+
+        });*/
+     });
+
+      $('#federatedlearn').on('click', function(){
+        $("#contentid").load("/train/federated");
+        });
+        //联邦学习展示
+        $('#federatedlearn2').on('click', function(){
+            $("#contentid").load("/display/federated");
+        });
+        //联邦学习诊断
+        $('#federatedlearn3').on('click', function(){
+            $("#contentid").load("/diagnose/federated");
+        });
+
+    //数据展示
+    $('#datadisplay').bind("click", function(){
+         $("#contentid").load("/dara_Process");
+     });
+
+    //模型训练
+    $('#edgecal').bind("click", function(){
+         {#$("#contentid").load("/Branch1_train");#}
+         $("#contentid").load("/trainHomePage");
+     });
+
+    //模型展示
+    $('#edgecal2').bind("click", function(){
+        {#$("#contentid").load("/layer_4wdcnn_show");#}
+         $("#contentid").load("/layers_Show");
+     });
+
+    //模型诊断
+    $('#edgecal3').bind("click", function(){
+         $("#contentid").load("/cloudDiagnosis");
+         $("#contentid").load("/edgeDiagnosis");
+     });
+
+
+
+});
+</script>
+<body>
+    <div id="main">
+        <div class="top-head">
+            <div id="logo"><i class="glyphicon glyphicon-fire"></i>&nbsp;设备故障诊断及预警模型</div>
+            <div id="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-list"></i>&nbsp;轴承故障诊断</div>
+            <div id="per-mes"><i class="glyphicon glyphicon-user"></i>&nbsp;您好，admin </div>
+        </div>
+        <div class="left-menu">
+             <!-- 侧边栏标签页 -->
+        <ul class="nav nav-stacked">
+            <!-- 侧边栏选项 -->
+            <li role="presentation" class="active">
+                <a id="index1" href="javascript:void(0)"><i class="glyphicon glyphicon-home"></i>&nbsp;首页</a>
+                <!--
+                <ul id="list" class="collapse in">
+                    <li class="active">
+                        <a href="">
+                            <p>操作一</P>
+                        </a>
+                    </li>
+                    <li><a href="">
+					<p>操作一</P>
+					</a></li>
+                </ul>-->
+            </li>
+            <li role="presentation">
+                <!-- 选项控制data-target对应的显隐 -->
+                <a href="javascript:void(0)" data-toggle="collapse" data-target="#list1"><i class="glyphicon glyphicon-filter"></i>&nbsp;数据预处理</a>
+                <!-- 隐藏的详细菜单 -->
+                <ul id="list1" class="collapse in">
+                <li class="active">
+                    <a id="dataprocess" href="javascript:void(0)">
+                        <p>数据处理</P>
+                    </a>
+                </li>
+                <li><a id="datadisplay" href="javascript:void(0)"><p>数据展示</P></a></li>
+                </ul>
+                 </li>
+            <li role="presentation">
+{#                <a href="javascript:void(0)"  data-toggle="collapse" data-target="#list2"><i class="glyphicon glyphicon-expand"></i>&nbsp;模型训练</a>#}
+                <a href="javascript:void(0)"  data-toggle="collapse" data-target="#list2"><i class="glyphicon glyphicon-modal-window"></i>&nbsp;模型训练</a>
+                <!-- 隐藏的详细菜单 -->
+                <ul id="list2" class="collapse in">
+                <li class="active">
+                    <a id="edgecal" href="javascript:void(0)">
+                        <p>边缘计算</P>
+                    </a>
+                </li>
+                <li><a id="federatedlearn" href="javascript:void(0)"><p>联邦学习</P></a></li>
+                <li><a id="bilstm" href="javascript:void(0)"><p>Bi-LSTM</P></a></li>
+                </ul>
+            </li>
+            <li role="presentation">
+                <a href="javascript:void(0)"  data-toggle="collapse" data-target="#list3"><i class="glyphicon glyphicon-expand"></i>&nbsp;模型展示</a>
+                <!-- 隐藏的详细菜单 -->
+                <ul id="list3" class="collapse in">
+                <li class="active">
+                    <a id="edgecal2" href="javascript:void(0)">
+                        <p>边缘计算</P>
+                    </a>
+                </li>
+                <li><a id="federatedlearn2" href="javascript:void(0)"><p>联邦学习</P></a></li>
+                <li><a id="bilstm2" href="javascript:void(0)"><p>Bi-LSTM</P></a></li>
+                </ul>
+            </li>
+			<li role="presentation">
+                <a href="javascript:void(0)" data-toggle="collapse" data-target="#list4"><i class="glyphicon glyphicon-cd"></i>&nbsp;模型诊断</a>
+                <!-- 隐藏的详细菜单 -->
+                <ul id="list4" class="collapse in">
+                <li class="active">
+                    <a id="edgecal3" href="javascript:void(0)">
+                        <p>边缘计算</P>
+                    </a>
+                </li>
+                 <li><a id="federatedlearn3" href="javascript:void(0)"><p>联邦学习</P></a></li>
+                <li><a id="bilstm3" href="javascript:void(0)"><p>Bi-LSTM</P></a></li>
+                </ul>
+            </li>
+             </ul>
+        </div>
+        <div class="right-content">
+			<div id="contentid" style="margin:10px;" >
+                <ol class="breadcrumb">
+	                <li>首页</li>
+                </ol>
+                <div style="text-align:center;">
+{#                     <img src="{{ url_for('static', filename='image/platform.png') }}" width="85%" height="45%" alt="实验平台"/>#}
+                    <img src="{{ url_for('static', filename='image/firstPage.png') }}" width="85%" height="550px" alt="实验平台"/>
+                </div>
+
+			</div>			
+        </div>
+    </div>
+</body>
+ 
+</html>

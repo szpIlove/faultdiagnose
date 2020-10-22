@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .nav {
+            text-align: center;
+        }
+        #myDiv {
+        }
+        #myDiv img{height:600px;}
+        .primary-btn {
+            font-size: 14px;
+            color: #fff;
+            height: 44px;
+            padding: 0 20px;
+            background-color: #0000FF;
+            border: 1px solid #0000FF;
+            line-height: 1.2;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            outline: none;
+            position: relative;
+        }
+        .primary-btn::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            border: inherit;
+            border-color: #000;
+            border-radius: inherit;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            content: ' ';
+        }
+        .primary-btn:active::before {
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+
+        function completeLoading() {
+            document.getElementById("loadingDiv").style.display="none";
+        }
+        //展示loading效果
+        function showLoading()
+        {
+            document.getElementById("loadingDiv").style.display="block";
+        }
+    $(function(){
+        //首页
+         $("#btn1").click(function(){
+             {#showLoading()#}
+             {#//进行业务逻辑的处理#}
+             {#completeLoading()#}
+             $.ajax({
+                type: "GET",
+                url: "/layer_4wdcnn_show",
+                 beforeSend: function(){
+                    showLoading()
+                },
+                success: function (res) {
+                    completeLoading()
+                    $("#contentid").html(res);
+                },
+                error:function(){
+                    alert('上传失败');
+            }})
+         });
+    });
+
+    </script>
+
+    <div style="height: 1300px;">
+        <div id="contentid" style="margin:10px;">
+            <ol class="breadcrumb" style="width: 1200px;">
+                <li>中间层展示</li>
+            </ol>
+        </div>
+        <div class="nav" id="btnDiv">
+            <button class="primary-btn" type="submit" id="btn1" > 可视化生成 </button>
+    {#        <button class="primary-btn" type="submit" id="btn2" style="margin-left:15px;"> 训练展示 </button>#}
+    {#        <button class="primary-btn" type="submit" id="btn3" style="margin-left:15px;"> Branch3 </button>#}
+        </div>
+        <div class="nav" id="myImg">
+            <img src="{{ url_for('static', filename='image/layerDisplayFirstPage.png') }}" width="65%" height="65%" alt="模型训练"/>
+        </div>
+        <div class="nav" id="myDiv"></div>
+        <div id="loadingDiv" style="display: none; "><div id="over" style=" position: absolute;top: 0;left: 0; width: 100%;height: 100%; background-color: #f5f5f5;opacity:0.5;z-index: 1000;"></div><div id="layout" style="position: absolute;top: 40%; left: 40%;width: 20%; height: 20%;  z-index: 1001;text-align:center;"><img src="static/image/jsLoading.gif" height="220" width="220" /></div></div>
+    </div>
+    <script type="text/javascript">
+        var btn = document.getElementById("btn1");
+        btn.addEventListener('click',function(){
+            showLoading()
+            //进行业务逻辑的处理
+            completeLoading()
+
+        },false)
+
+    </script>
+</body>
+</html>

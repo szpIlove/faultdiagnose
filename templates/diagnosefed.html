@@ -1,0 +1,28 @@
+<script type="text/javascript">
+        function startdiagfed() {
+        $.get('/diagnose/startfed',function(res){
+            $("#contentid").html(res);
+        });
+    }
+</script>
+<div>
+    <ol class="breadcrumb">
+	    <!--<li><a href="#">Home</a></li>
+	    <li class="active"><a href="#">Library</a></li>-->
+	     <li>联邦诊断</li>
+    </ol>
+    <table align="left" width="100%">
+            <tbody>
+                <tr align="center">
+                    <td align="right" width="10%">
+                        <button onclick="startdiagfed()" style="background-color: #ccff90">开始诊断</button>
+                    </td>
+                    <td align="center" width="20%">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    <img src="{{ url_for('static', filename='image/diagnosefed.png') }}" width="55%" height="45%" alt="联邦诊断"/>
+</div>
+
+

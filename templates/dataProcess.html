@@ -1,0 +1,69 @@
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+$(function(){
+    //首页
+     $("#uploadid").click(function(){
+         var formData = new FormData($("#form")[0]);
+        $.ajax({
+            type: "POST",
+            url: "/upload",
+            data: formData,
+            processData: false,// 不加会报错
+            contentType: false,// 不加会报错
+            success: function (res) {
+                $("#contentid").html(res);
+            },
+            error:function(){
+                {#alert('上传失败');#}
+        }
+        });
+     });
+
+});
+function faultcurve(elem) {
+    $.get('/dataprocess/faultcurve', { faultType:$($(elem)).html()},function(res){
+            $("#contentid").html(res);
+    });
+}
+
+</script>
+<div>
+    <ol class="breadcrumb">
+	    <!--<li><a href="#">Home</a></li>
+	    <li class="active"><a href="#">Library</a></li>-->
+	    <li>数据预处理</li>
+    </ol>
+    <div>
+        <form id="form"  method="post" enctype="multipart/form-data" >
+            <table align="left" width="100%">
+            <tbody>
+                <tr align="center">
+                    <td align="right" width="10%">数据导入</td>
+                    <td align="center" width="20%">
+                        <input id="shangchuan" name="file" type="file"/>
+                    </td>
+                    <td align="left" width="60%"><input id="uploadid" type="button" value="上传"/></td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+    </div>
+    <div style="margin:10px;">
+        <table align="left" width="100%" class="table table-bordered">
+            <thead>
+                <tr>
+                   <th width="30%">故障类型</th>
+                    <th width="40%">故障名称</th>
+                </tr>
+            </thead>
+            <tbody>
+             {% for filename in descriptlist %}
+                <tr>
+                    <td><a href="javascript:void(0)" onclick="faultcurve(this)" name="{{ filename[0] }}">{{ filename[0] }}</a></td>
+                    <td>{{ filename[1] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

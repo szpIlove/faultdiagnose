@@ -1,0 +1,17 @@
+<div>
+    <ol class="breadcrumb">
+	    <!--<li><a href="#">Home</a></li>
+	    <li class="active"><a href="#">Library</a></li>-->
+	    <li>联邦诊断</li>
+    </ol>    测试准确率为：{{testAcc}}
+    <div id="myDiv"></div>
+
+    <script type="text/javascript">
+        var bigImg = document.createElement("img");		//创建一个img元素
+        bigImg.src="data:image/png;base64, {{plot_diag_fed_url}}";   //给img元素的src属性赋值
+        bigImg.style.width="55%";
+        bigImg.style.height="50%";
+		var myDiv = document.getElementById('myDiv'); //获得dom对象
+		myDiv.appendChild(bigImg);
+    </script>
+</div>

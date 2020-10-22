@@ -1,0 +1,171 @@
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+$(function(){
+
+     $("#btn1").click(function(){
+
+         $.ajax({
+            type: "GET",
+            url: "/layer_4wdcnn_show",
+            success: function (res) {
+                $("#contentid").html(res);
+            },
+            error:function(){
+                alert('上传失败');
+        }
+
+            })
+
+     });
+});
+$(function(){
+
+     $("#btn2").click(function(){
+
+         $.ajax({
+            type: "GET",
+            url: "/layer_4wdcnn_show",
+            success: function (res) {
+                $("#contentid").html(res);
+            },
+            error:function(){
+                alert('上传失败');
+        }
+
+            })
+
+     });
+});
+$(function(){
+
+     $("#btn3").click(function(){
+
+         $.ajax({
+            type: "GET",
+            url: "/layer_4wdcnn_show",
+            success: function (res) {
+                $("#contentid").html(res);
+            },
+            error:function(){
+                alert('上传失败');
+        }
+
+            })
+
+     });
+});
+
+</script>
+
+    <style>
+    .nav {
+        text-align: center;
+    }
+    {##btnDiv {#}
+    {#    height:10px;#}
+        {#width:304px;#}
+    {#    line-height:10px;#}
+    {#    vertical-align:middle;#}
+    {#}#}
+    #myDiv {
+
+    }
+    #myDiv img{height:600px}
+    .primary-btn {
+        font-size: 14px;
+        color: #fff;
+        height: 44px;
+        padding: 0 20px;
+        background-color: #0000FF;
+        border: 1px solid #0000FF;
+        line-height: 1.2;
+        text-align: center;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        outline: none;
+        position: relative;
+    }
+    .primary-btn::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border: inherit;
+        border-color: #000;
+        border-radius: inherit;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        content: ' ';
+    }
+    .primary-btn:active::before {
+        opacity: 0.1;
+    }
+
+    </style>
+
+   <div>
+        <div id="contentid" style="margin:10px;">
+            <ol class="breadcrumb" style="width: 1200px;">
+                <li>模型中间层展示</li>
+            </ol>
+        </div>
+
+        <div class="nav" id="btnDiv">
+            <button class="primary-btn" type="submit" id="btn1" > Branch1 </button>
+            <button class="primary-btn" type="submit" id="btn2" style="margin-left:15px;"> Branch2 </button>
+            <button class="primary-btn" type="submit" id="btn3" style="margin-left:15px;"> Branch3 </button>
+            <button class="primary-btn" type="submit" id="btn4" style="margin-left:15px;"> 混淆矩阵 </button>
+        </div>
+{#        <div class="nav" id="myImg">#}
+{#            <img src="{{ url_for('static', filename='image/branches.png') }}" width="55%" height="45%" alt="模型中间层展示"/>#}
+{#        </div>#}
+        <div class="nav" id="myDiv"></div>
+    </div>
+
+    <script type="text/javascript">
+        var btn = document.getElementById("btn1");
+        btn.addEventListener('click',function(){
+            {#alert("hello wrold1");#}
+            var bigImg = document.createElement("img");		//创建一个img元素
+		    bigImg.src="data:image/png;base64, {{layer_4WDCNN_url}}";   //给img元素的src属性赋值
+            //bigImg.width="320";  //320个像素 不用加px
+            var myDiv = document.getElementById('myDiv'); //获得dom对象
+            {#var myImg = document.getElementById('myImg');#}
+            myDiv.innerHTML="";
+            {#myImg.innerHTML="";#}
+            myDiv.appendChild(bigImg);
+        },false)
+
+
+        var btn2 = document.getElementById("btn2");
+        btn2.addEventListener('click',function(){
+            {#alert("hello wrold2");#}
+            var bigImg1 = document.createElement("img");		//创建一个img元素
+		    bigImg1.src="data:image/png;base64, {{layer_5WDCNN_url}}";   //给img元素的src属性赋值
+            //bigImg.width="320";  //320个像素 不用加px
+            var myDiv = document.getElementById('myDiv'); //获得dom对象
+            {#var myImg = document.getElementById('myImg');#}
+            myDiv.innerHTML="";
+            {#myImg.innerHTML="";#}
+		    myDiv.appendChild(bigImg1);
+        },false)
+
+        var btn3 = document.getElementById("btn3");
+        btn3.addEventListener('click',function(){
+            {#alert("hello wrold3");#}
+            var bigImg2 = document.createElement("img");		//创建一个img元素
+		    bigImg2.src="data:image/png;base64, {{layer_CNN_LSTM_url}}";   //给img元素的src属性赋值
+		    //bigImg.width="320";  //320个像素 不用加px
+		    var myDiv = document.getElementById('myDiv'); //获得dom对象
+            {#var myImg = document.getElementById('myImg');#}
+            myDiv.innerHTML="";
+            {#myImg.innerHTML="";#}
+		    myDiv.appendChild(bigImg2);
+        },false)
+
+    </script>
+
+

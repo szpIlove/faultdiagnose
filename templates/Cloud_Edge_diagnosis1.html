@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
+    <style>
+        html,body{
+    width:100%;
+    height:100%;
+
+    margin:0px;
+}
+    #main{
+        width:100%;
+        height:100%;
+       /* background:red;*/
+        display:flex;
+        flex-wrap: wrap;
+        flex-direction:row;
+        justify-content: start;
+    }
+    .top-head{
+        width: 100%;
+        /*height: 5%;*/
+		background: #0c3144;
+        display:flex;
+        flex-wrap: no-wrap;
+        justify-content:center;
+    }
+    .left-menu{
+        width:12%;
+        height: 95%;
+        background:#0b3043;
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 20px;
+    }
+    .right-content{
+        {#width: 88%;#}
+        height:90%;
+     /*   background:blue;*/
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 20px;
+    }
+    #logo{
+        width:12%;
+        height:100%;
+        text-align:center;
+        line-height:80px;
+        /*background:purple;*/
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 22px;
+		color:#FFFFFF;
+    }
+
+    {##btn1 a{#}
+    {#    background-image:url('static/image/icons8-target.png');#}
+    {#}#}
+
+    li{
+        list-style:none;
+    }
+
+    a{
+        text-decoration: none;
+    }
+	.left-menu a{
+		color:#FFFFFF;
+    }
+    a:focus, a:hover {
+    color: #23527c;
+    text-decoration: none;
+    }
+    li:hover{
+        list-style:none;
+    }
+
+    input[type=text], input[type=password] {
+           border-color: #bbb;
+           height: 38px;
+           font-size: 14px;
+           border-radius: 2px;
+           outline: 0;
+           border: #ccc 1px solid;
+           padding: 0 10px;
+           width: 250px;
+           -webkit-transition: box-shadow .5s;
+           margin-bottom: 15px;
+       }
+
+       input[type=text]:hover,  input[type=text]:focus, input[type=password]:hover,  input[type=password]:focus {
+           border: 1px solid #56b4ef;
+           box-shadow: inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);
+           -webkit-transition: box-shadow .5s;
+       }
+       input::-webkit-input-placeholder {
+           color: #999;
+           -webkit-transition: color .5s;
+       }
+
+       input:focus::-webkit-input-placeholder,  input:hover::-webkit-input-placeholder {
+           color: #c2c2c2;
+           -webkit-transition: color .5s;
+       }
+       .icon {
+           font-size: 70px;
+        }
+
+    </style>
+</head>
+<body>
+
+       <script type="text/javascript">
+
+            $(function(){
+                //首页
+                 $("#btn1").click(function(){
+                     var formData = new FormData($("#form")[0]);
+                    $.ajax({
+                        type: "POST",
+                        url: "/edgeDiagnosis",
+                        data: formData,
+                        processData: false,// 不加会报错
+                        contentType: false,// 不加会报错
+                        success: function (res) {
+                            $("#contentid").html(res);
+                        },
+                        error:function(){
+                            alert('上传失败');
+                    }
+                    });
+                 });
+
+            });
+
+       </script>
+
+       <div>
+           <div class="right-content">
+                <div id="contentid" style="margin:10px;">
+                    <ol class="breadcrumb" style="width: 1200px;">
+                        <li>Edge</li>
+                    </ol>
+                </div>
+               <div>
+                   <div class="right-content">
+                       <form method="post" id="form">
+                           &nbsp;&nbsp;&nbsp;&nbsp;<label>用户时间容忍因子值：</label>
+                           <input type="text" placeholder="请输入用户时间容忍因子值" name="timeToleranceFactor" />
+                           <a href="javascript:void(0);" id="btn1">提交</a>
+                       </form>
+                   </div>
+                   <div>
+                       &nbsp;&nbsp;&nbsp;&nbsp;选择分支{{ep}}模型，开始诊断。。。
+                   </div>
+                   <div style="height: 70px;line-height: 70px;">
+                       &nbsp;&nbsp;&nbsp;&nbsp;<i class="icon ion-android-download"></i>
+                       <span>
+                           返回诊断结果：{{faultDescript}}
+                       </span>
+
+                       &nbsp;&nbsp;<i class="icon ion-clock"></i>
+                       实际诊断时间：{{lastTime}}<br>
+{#                       <img src="{{ url_for('static', filename='image/alarm-outline.svg') }}" width="70px" height="70px"/>#}
+                   </div>
+
+               </div>
+
+           <div class="right-content">
+                <div id="contentid" style="margin:10px;" >
+                    <ol class="breadcrumb" style="width: 1200px;">
+                        <li>Cloud</li>
+                    </ol>
+                </div>
+               <div style="height: 70px;line-height: 70px;">
+                   &nbsp;&nbsp;&nbsp;&nbsp;云服务端正在监测。。。<br>
+                   &nbsp;&nbsp;&nbsp;&nbsp;<i class="icon ion-ios-cloud-outline"></i>
+                   测试集准确率为：{{testAcc}}&nbsp;&nbsp;
+                   <i class="icon ion-disc"></i>
+                   诊断结果：{{faultDescript}}<br>
+               </div>
+            </div>
+           </div>
+       </div>
+
+</body>
+</html>

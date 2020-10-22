@@ -1,0 +1,28 @@
+<script type="text/javascript">
+     function startdispfed() {
+        $.get('/display/startfed',function(res){
+            $("#contentid").html(res);
+        });
+    }
+</script>
+<div>
+    <ol class="breadcrumb">
+	    <!--<li><a href="#">Home</a></li>
+	    <li class="active"><a href="#">Library</a></li>-->
+	    <li>联邦展示</li>
+    </ol>
+    <table align="left" width="100%">
+            <tbody>
+                <tr align="center">
+                    <td align="right" width="10%">
+                        <button onclick="startdispfed()" style="background-color: #ffcdd2">模型展示</button>
+                    </td>
+                    <td align="center" width="20%">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    <img src="{{ url_for('static', filename='image/distributefed.png') }}" width="50%" height="40%" alt="联邦展示"/>
+</div>
+

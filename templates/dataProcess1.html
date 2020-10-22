@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .nav {
+            text-align: center;
+            text-valign: center;
+        }
+        .right-content{
+            height:90%;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 20px;
+        }
+        table.hovertable {
+            font-family: verdana,arial,sans-serif;
+            font-size:21px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #999999;
+            border-collapse: collapse;
+        }
+        table.hovertable th {
+            background-color:#c3dde0;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+        }
+        table.hovertable tr {
+            background-color:#d4e3e5;
+        }
+        table.hovertable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+        }
+        table
+        {
+            width:65%;
+        }
+    </style>
+
+</head>
+<body>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        function faultcurve(elem) {
+        $.get('/dataprocessEdge/faultcurve', { faultType:$($(elem)).html()},function(res){
+                $("#contentid").html(res);
+            });
+        }
+    </script>
+
+    <div id="contentid" style="margin:10px;">
+        <ol class="breadcrumb" style="width: 1200px;">
+            <li>故障类型</li>
+        </ol>
+    </div>
+    <div class="nav" style=" margin:20px;">
+
+          <table class="hovertable" style="margin:auto;">
+                <thead>
+                   <tr>
+                       <th class="nav">故障类型</th>
+                       <th class="nav">故障名称</th>
+
+                   </tr>
+               </thead>
+
+              <tbody>
+
+                      {% for faultType, faultDescription in faultDict.items() %}
+                          <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                               <td>{{faultType}}</td>
+{#                               <td><a href = "{{ url_for('faultType',faultType=faultType) }}">{{faultDescription}}</a></td>#}
+                                <td id="table"><a href="javascript:void(0)" onclick="faultcurve(this)" name="{{ faultType }}">{{ faultDescription }}</a></td>
+                           </tr>
+                      {% endfor %}
+               </tbody>
+          </table>
+
+       </div>
+</body>
+</html>

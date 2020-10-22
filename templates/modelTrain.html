@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .nav {
+            text-align: center;
+        }
+        #myDiv {
+        }
+        #myDiv img{height:600px;}
+        .primary-btn {
+            font-size: 14px;
+            color: #fff;
+            height: 44px;
+            padding: 0 20px;
+            background-color: #0000FF;
+            border: 1px solid #0000FF;
+            line-height: 1.2;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            outline: none;
+            position: relative;
+        }
+        .primary-btn::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            border: inherit;
+            border-color: #000;
+            border-radius: inherit;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            content: ' ';
+        }
+        .primary-btn:active::before {
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <div id="contentid" style="margin:10px;">
+        <ol class="breadcrumb" style="width: 1200px;">
+            <li>模型训练</li>
+        </ol>
+    </div>
+    <div class="nav" id="btnDiv">
+        <button class="primary-btn" type="submit" id="btn1" > Branch1 </button>
+        <button class="primary-btn" type="submit" id="btn2" style="margin-left:15px;"> Branch2 </button>
+        <button class="primary-btn" type="submit" id="btn3" style="margin-left:15px;"> Branch3 </button>
+    </div>
+{#    测试准确率为：{{testAcc}}#}
+    <div class="nav" id="myImg">
+        <img src="{{ url_for('static', filename='image/edge_cloud_train.png') }}" width="55%" height="45%" alt="模型训练"/>
+    </div>
+    <div class="nav" id="myDiv">
+{#    <div id="myDiv">#}
+{##}
+{#    </div>#}
+
+    <script type="text/javascript">
+        var btn = document.getElementById("btn1");
+        btn.addEventListener('click',function(){
+            var bigImg = document.createElement("img");		//创建一个img元素
+		    bigImg.src="data:image/png;base64, {{train_Branch1_acc_url}}";   //给img元素的src属性赋值
+            bigImg.width=600;
+            bigImg.heidth=200;
+            var bigImg1 = document.createElement("img");		//创建一个img元素
+		    bigImg1.src="data:image/png;base64, {{train_Branch1_loss_url}}";
+		    bigImg1.width=600;
+            bigImg1.heidth=200;
+		    var newNode = document.createElement("p");
+            newNode.innerHTML = "Branch1测试准确率为：{{testAcc1}}";
+            var myDiv = document.getElementById('myDiv'); //获得dom对象
+            var myImg = document.getElementById('myImg');
+            myDiv.innerHTML="";
+            myImg.innerHTML="";
+            myDiv.appendChild(newNode);
+            myDiv.appendChild(bigImg);
+            myDiv.appendChild(bigImg1);
+        },false)
+
+        var btn2 = document.getElementById("btn2");
+        btn2.addEventListener('click',function(){
+            var bigImg = document.createElement("img");		//创建一个img元素
+		    bigImg.src="data:image/png;base64, {{train_Branch2_acc_url}}";   //给img元素的src属性赋值
+            bigImg.width=600;
+            bigImg.heidth=240;
+            var bigImg1 = document.createElement("img");		//创建一个img元素
+		    bigImg1.src="data:image/png;base64, {{train_Branch2_loss_url}}";
+		    bigImg1.width=600;
+            bigImg1.heidth=240;
+		    var newNode = document.createElement("p");
+            newNode.innerHTML = "Branch2测试准确率为：{{testAcc2}}";
+            var myDiv = document.getElementById('myDiv'); //获得dom对象
+            var myImg = document.getElementById('myImg');
+            myDiv.innerHTML="";
+            myImg.innerHTML="";
+            myDiv.appendChild(newNode);
+            myDiv.appendChild(bigImg);
+            myDiv.appendChild(bigImg1);
+        },false)
+
+        var btn3 = document.getElementById("btn3");
+        btn3.addEventListener('click',function(){
+            var bigImg = document.createElement("img");		//创建一个img元素
+		    bigImg.src="data:image/png;base64, {{train_Branch3_acc_url}}";   //给img元素的src属性赋值
+            bigImg.width=600;
+            bigImg.heidth=240;
+            var bigImg1 = document.createElement("img");		//创建一个img元素
+		    bigImg1.src="data:image/png;base64, {{train_Branch3_loss_url}}";
+		    bigImg1.width=600;
+            bigImg1.heidth=240;
+		    var newNode = document.createElement("p");
+            newNode.innerHTML = "Branch3测试准确率为：{{testAcc3}}";
+            var myDiv = document.getElementById('myDiv'); //获得dom对象
+            var myImg = document.getElementById('myImg');
+            myDiv.innerHTML="";
+            myImg.innerHTML="";
+            myDiv.appendChild(newNode);
+            myDiv.appendChild(bigImg);
+            myDiv.appendChild(bigImg1);
+        },false)
+
+    </script>
+</body>
+</html>

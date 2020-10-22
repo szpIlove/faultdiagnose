@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #myDiv {
+        }
+         .nav {
+            text-align: center;
+        }
+         .pure-table {
+            text-align: center;
+        }
+         table.hovertable {
+            font-family: verdana,arial,sans-serif;
+            font-size:21px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #999999;
+            border-collapse: collapse;
+        }
+        table.hovertable th {
+            background-color:#c3dde0;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+        }
+        table.hovertable tr {
+            background-color:#d4e3e5;
+        }
+        table.hovertable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+        }
+        table
+        {
+            width:65%;
+        }
+        .primary-btn {
+        font-size: 14px;
+        color: #fff;
+        height: 44px;
+        padding: 0 20px;
+        background-color: #0000FF;
+        border: 1px solid #0000FF;
+        line-height: 1.2;
+        text-align: center;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        outline: none;
+        position: relative;
+    }
+    .primary-btn::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border: inherit;
+        border-color: #000;
+        border-radius: inherit;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        content: ' ';
+    }
+    .primary-btn:active::before {
+        opacity: 0.1;
+    }
+    </style>
+
+</head>
+<body>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        //首页
+
+         $("#btn1").click(function(){
+             $.ajax({
+                type: "GET",
+                url: "/dara_Process",
+                success: function (res) {
+                    $("#contentid").html(res);
+                },
+                error:function(){
+                    alert('上传失败');
+            }
+
+                })
+
+         });
+    });
+    </script>
+    <div id="contentid" style="margin:10px;">
+        <ol class="breadcrumb" style="width: 1200px;">
+            <li>故障类型</li>
+        </ol>
+    </div>
+       <div class="nav" style=" margin:20px;">
+           <div class="nav" id="btnDiv">
+               {#<button class="primary-btn" type="submit" id="btn1" > 返回 </button>#}
+                <a href="javascript:void(0);" id="btn1">返回</a>
+           </div>
+          <table class="hovertable" style="margin:auto;">
+                <thead>
+                   <tr>
+                       <th class="nav">故障类型</th>
+                       <th class="nav">故障名称</th>
+
+                   </tr>
+               </thead>
+
+              <tbody>
+                  <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                        <td>{{faultType}}</td>
+                        <td>{{faultDescript}}</td>
+                   </tr>
+               </tbody>
+          </table>
+
+       </div>
+
+       <div class="nav" id="myDiv"></div>
+
+    <script type="text/javascript">
+        var bigImg = document.createElement("img");		//创建一个img元素
+        bigImg.src="data:image/png;base64, {{faultType_plot_url}}";   //给img元素的src属性赋值
+		var myDiv = document.getElementById('myDiv'); //获得dom对象
+		myDiv.appendChild(bigImg);
+    </script>
+
+</body>
+</html>
